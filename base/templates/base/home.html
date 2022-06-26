@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<style>
+	.container {
+			width: 100%;
+			max-width: 390px;
+			height: max-content;
+			min-height: 400px;
+			margin: 0 auto;
+			box-shadow: 0px 10px 30px rgb(71, 71, 71);
+			font-family: sans-serif;
+			padding: 0;
+		}
+	.head {
+		width: 100%;
+		height: max-content;
+		min-height: 14vh;
+		box-shadow: 0px 7px 20px rgb(71, 71, 71);
+		margin: 0;
+		padding: 0;
+	}
+	.heads {
+		width: 100%;
+		height: max-content;
+		min-height: 14vh;
+		padding-left: 1em;
+		padding-top: 1%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.round {
+		width: 69%;
+		height: 7vh;
+		border-radius: 32px;
+		background-color: black;
+		margin-bottom: 0;
+	}
+	.flex1 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-right: 2em;
+		padding-top: 1em;
+	}
+	.second {
+		display: flex;
+		flex-direction: column;
+		margin-top: 1em;
+	}
+	.mags {
+		width: 15%;
+		height: 9vh;
+		background-color: red;
+		margin-bottom: 0;
+		border-radius: 45px;
+		margin: 1em;
+	}
+	.four {
+		display: flex;
+		width: 90%;
+		height: max-content;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0px 10px 30px rgb(71, 71, 71);
+		margin: auto;
+		border-radius: 35px;
+	}
+	a {
+		text-decoration: none;
+		color: gray;
+	}
+</style>
+<div class="container">
+<div class="head">
+<div class="heads">
+<h1>Chatme</h1>
+<div class="flex1">
+	<div class="round"></div>
+	<h3 style="margin-top: 0;">{{ request.user.username }}</h3>
+</div>
+</div>
+<center>
+	<h2 style="padding-bottom: 1em;">Messages</h2>
+</center>
+</div>
+<br>
+
+{% for user in users %}
+<a href="{% url 'messages' request.user.id user.id %}">
+<div class="four">
+		<div class="mags"></div>
+		<div class="second">
+			<center><h3 style="margin-bottom: 0;">{{ user.username }}</h3></center>
+			<h6 style="margin-top: 0;">How are you doing Today</h6>
+		</div>
+		<div class="mags"></div>
+</div>
+</a>
+<br /><br />
+{% endfor %}
+</div>
+{% endblock %}
+{% for people in people %}
+	<a href="{% url 'detail' people.id %}">
+	<div class="four">
+		<div class="mags"></div>
+		<div class="second">
+			<center><h3 style="margin-bottom: 0;">{{ people.user.username }}</h3></center>
+			<h6 style="margin-top: 0;">How are you doing Today</h6>
+		</div>
+		<div class="mags"></div>
+	</div>
+	</a>
+	<br><br>
+	{% endfor %}

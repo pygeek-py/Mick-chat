@@ -1,0 +1,142 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<style>
+	.container {
+			width: 100%;
+			max-width: 390px;
+			height: 103vh;
+			margin: 0 auto;
+			box-shadow: 0px 10px 30px rgb(71, 71, 71);
+			font-family: sans-serif;
+			padding: 0;
+		}
+	.head {
+		width: 100%;
+		height: max-content;
+		min-height: 14vh;
+		box-shadow: 0px 7px 20px rgb(71, 71, 71);
+		margin: 0;
+		padding: 0;
+	}
+	.heads {
+		width: 100%;
+		height: max-content;
+		min-height: 14vh;
+		padding-left: 1em;
+		padding-top: 1%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.round {
+		width: 69%;
+		height: 7vh;
+		border-radius: 32px;
+		background-color: black;
+		margin-bottom: 0;
+	}
+	.flex1 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-right: 2em;
+		padding-top: 1em;
+	}
+	.foot {
+		bottom: 0;
+		color: white;
+		border-radius: 17px;
+		margin-left: 1em;
+		width: 80%;
+		height: 7vh;
+		border-radius: 15px;
+		border-style: solid;
+		border-color: black;
+	}
+	#scrol {
+		width: 100%;
+		height: 65vh;
+		overflow-y: scroll;
+		margin-left: 3%;
+	}
+	.good {
+		width: 43%;
+		height: max-content;
+		min-height: 9vh;
+		background-color: red;
+		color: white;
+		font-size: 13px;
+		padding-left: 2%;
+		border-radius: 17px;
+	}
+	.bad {
+		width: 43%;
+		height: max-content;
+		min-height: 9vh;
+		background-color: orange;
+		color: white;
+		font-size: 13px;
+		margin-left: 14em;
+		padding-left: 2%;
+		border-radius: 17px;
+	}
+	input {
+		width: 90%;
+		height: 7vh;
+		border-radius: 15px;
+		border: none;
+	}
+	.btn {
+		border-style: none;
+		font-size: 24px;
+		background-color: white;
+		height: max-content;
+	}
+	.flex2 {
+		display: flex;
+		flex-wrap: no-wrap;
+	}
+	.spa {
+		font-size: 28px;
+	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
+</style>
+<div class="container">
+<div class="container">
+<div class="head">
+<div class="heads">
+<h1><span class="spa"><a href="{% url 'home' %}"><</a></span>Chatme</h1>
+<div class="flex1">
+	<div class="round"></div>
+	<h3 style="margin-top: 0;">{{ guy.username }}</h3>
+</div>
+</div>
+</div>
+<br>
+<br>
+<div id="scrol">
+{% for mess in mess %}
+{% if mess.send == request.user %}
+<div class="good">
+<h2 style="padding-top: 5%;">{{ mess.body }}</h2>
+</div>
+{% else %}
+<div class="bad">
+<h2 style="padding-top: 5%;">{{ mess.body }}</h2>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+<div class="foot">
+<form method="post" class="flex2">
+	{% csrf_token %}
+	{{ form.body }}
+	<button type="submit" class="btn">></button>
+</form>
+</div>
+</div>
+{% endblock %}
